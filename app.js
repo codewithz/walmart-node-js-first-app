@@ -1,5 +1,5 @@
-const logger = require('./logger');
+const path = require('path');
 
-console.log(logger);
+let pathObj = path.parse(__filename);
 
-logger.log('Zartab has logged in');
+console.log(pathObj);
