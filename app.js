@@ -1,13 +1,12 @@
-const fs = require('fs');
+const EventEmitter = require('events');
 
-console.log('Start');
+const emitter = new EventEmitter();
 
-// const data = fs.readFileSync('./walmart.txt');// block here until file read is complete
-// console.log(data);
+//Register a listener
 
-fs.readFile('./walmart.txt', { encoding: 'utf-8' }, (err, data) => {
-    if (err) console.log(err);
-    console.log(data);
-})
+emitter.addListener('messageLogged', function () {
+    console.log('Listener is called')
+});
 
-console.log('End');
+//Raise an event 
+emitter.emit('messageLogged');    // Making a noise, produce -- signalling something has happened
