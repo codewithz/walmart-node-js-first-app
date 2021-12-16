@@ -1,22 +1,27 @@
 console.log('Before');
 //Asynchronous way
-getCategory(100, function (category) {
+getCategory(100, getTopTwoProductsNamed);
+
+
+
+function getTopTwoProductsNamed(category) {
+
     console.log('Category', category);
     //Getting the top two products
-    getTopTwoProducts(category.name, function (topTwoProducts) {
-        console.log(topTwoProducts);
-        // Get the price for first products
-        getPriceForTopProduct(topTwoProducts[0], function (price) {
-            console.log("Price of the product is:" + price);
-        });
-    });
-});
-//              CALLBACK HELL
-// Synchronous way
+    getTopTwoProducts(category.name, getPriceForTopProductNamed);
 
-// const category = getCategory(100);
-// const topTwoProducts = getPriceForTopProduct(category.name);
-// const price = getPriceForTopProduct(topTwoProducts[0]);
+}
+
+function getPriceForTopProductNamed(topTwoProducts) {
+    console.log(topTwoProducts);
+    // Get the price for first products
+    getPriceForTopProduct(topTwoProducts[0], displayPriceOfTopProduct);
+}
+
+
+function displayPriceOfTopProduct(price) {
+    console.log("Price of the product is:" + price);
+}
 
 
 
