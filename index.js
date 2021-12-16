@@ -18,7 +18,6 @@ function getPriceForTopProductNamed(topTwoProducts) {
     getPriceForTopProduct(topTwoProducts[0], displayPriceOfTopProduct);
 }
 
-
 function displayPriceOfTopProduct(price) {
     console.log("Price of the product is:" + price);
 }
