@@ -1,16 +1,33 @@
 console.log('Before');
 //Asynchronous way
-getCategory(100, function (category) {
-    console.log('Category', category);
-    //Getting the top two products
-    getTopTwoProducts(category.name, function (topTwoProducts) {
-        console.log(topTwoProducts);
-        // Get the price for first products
-        getPriceForTopProduct(topTwoProducts[0], function (price) {
-            console.log("Price of the product is:" + price);
-        });
+// getCategory(100, function (category) {
+//     console.log('Category', category);
+//     //Getting the top two products
+//     getTopTwoProducts(category.name, function (topTwoProducts) {
+//         console.log(topTwoProducts);
+//         // Get the price for first products
+//         getPriceForTopProduct(topTwoProducts[0], function (price) {
+//             console.log("Price of the product is:" + price);
+//         });
+//     });
+// });
+
+const p = getCategory(100);
+p
+    .then((category) => {
+
+        getTopTwoProducts(category.name)
+            .then((topTwoProducts) => {
+                getPriceForTopProduct(topTwoProducts[0])
+                    .then((price) => {
+                        console.log('Price of the product is ' + price);
+                    })
+            });
+
+    })
+    .catch((err) => {
+        console.log("error", err.message);
     });
-});
 
 
 console.log('After');
@@ -35,6 +52,7 @@ function getTopTwoProducts(category) {
             console.log('Calling the Walmart API for getting top two products in category [' + category + ']');
             topTwoProducts = ['Apple IPhone', 'Samsung Galaxy A72'];
             resolve(topTwoProducts);
+            //reject(new Error('Top Two Error'))
         }, 2000);
     })
 }
@@ -45,6 +63,7 @@ function getPriceForTopProduct(product) {
         setTimeout(() => {
             console.log('Fetching the price for ', product);
             resolve(5000);
+            //reject(new Error('Price Error'))
         }, 3000)
     })
 }
