@@ -1,11 +1,16 @@
 const http = require('http');
 
-const server = http.createServer();
+const server = http.createServer((request, response) => {
+    if (request.url === '/') {
+        response.write('Hello Walmart');
+        response.end();
+    }
 
-
-server.on('connection', (socket) => {
-    console.log('New Connection..');
-})
+    if (request.url === '/api/categories') {
+        response.write(JSON.stringify(['Clothings', 'Electronics', 'Cycling', 'Child Care Products']));
+        response.end();
+    }
+});
 
 server.listen(3000);
 
