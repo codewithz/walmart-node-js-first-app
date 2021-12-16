@@ -1,5 +1,13 @@
-const path = require('path');
+const fs = require('fs');
 
-let pathObj = path.parse(__filename);
-console.log('Actual', __filename);
-console.log('Parsed', pathObj);
+// const files = fs.readdirSync('./');
+// console.log(files);
+
+fs.readdir('#', function (err, files) {
+    if (err) {
+        console.log('Error', err);
+    }
+    else {
+        console.log('Result:', files)
+    }
+});
