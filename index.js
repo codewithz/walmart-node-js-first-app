@@ -1,19 +1,27 @@
 console.log('Before');
-const category = getCategory(100);
-console.log(category);
+getCategory(100, function (category) {
+    console.log('Category', category);
+
+    //Getting the top two products
+    getTopTwoProducts(category.name);
+});
+
 console.log('After');
 
-// Three patterns for handling the asynchronous code 
-// 1. Callbacks
-// 2. Promises 
-// 3. Async / Await
 
-function getCategory(id) {
+function getCategory(id, callback) {
 
     setTimeout(() => {
         console.log('Reading a category from database...');
-        return { categoryId: id, name: 'Electronics' };
+        callback({ categoryId: id, name: 'Electronics' });
     }, 2000);
 
-    return 1;
+}
+
+function getTopTwoProducts(category) {
+    setTimeout(() => {
+        console.log('Calling the Walmart API for getting top two products in category [' + category + ']');
+        topTwoProducts = ['Apple IPhone', 'Samsung Galaxy A72'];
+        return topTwoProducts;
+    }, 2000)
 }
