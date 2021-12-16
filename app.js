@@ -1,13 +1,8 @@
 const fs = require('fs');
 
-// const files = fs.readdirSync('./');
-// console.log(files);
+console.log('Start');
 
-fs.readdir('#', function (err, files) {
-    if (err) {
-        console.log('Error', err);
-    }
-    else {
-        console.log('Result:', files)
-    }
-});
+const data = fs.readFileSync('./walmart.txt');// block here until file read is complete
+console.log(data);
+
+console.log('End');
